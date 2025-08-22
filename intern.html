@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intern Madness</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #9eb6ff;   /* Blue */
+            --primary-dark: #2563eb;
+            --primary-light: #60a5fa;
+            --secondary: #14b8a6; /* Jade */
+            --accent: #5eead4;    /* Light Jade */
+            --dark: #ffffff;      /* Light text for dark background */
+            --darker: #ffffff;    /* Lighter text */
+            --light: #1a2433;     /* Card background */
+            --lighter: #020617;   /* Main background */
+            --gray: #b4c1d0;      /* Brighter Muted text */
+            --gray-light: #475569;/* Brighter Borders */
+            --success: #22c55e;   /* Jade Green */
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            background-color: var(--lighter);
+            line-height: 1.6;
+            overflow-x: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            cursor: default;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--lighter);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--primary);
+            border-radius: 0;
+            border: 3px solid var(--lighter);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: var(--primary-light);
+        }
+
+        html.light-mode {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #3b82f6;
+            --secondary: #7c3aed;
+            --accent: #ec4899;
+            --dark: #0f172a;
+            --darker: #020617;
+            --light: #f8fafc;
+            --lighter: #ffffff;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --success: #10b981;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--light);
+            border: 1px solid var(--gray-light);
+            cursor: pointer;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        .theme-toggle i {
+            font-size: 1.2rem;
+            color: var(--dark);
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            position: absolute;
+        }
+
+        .theme-toggle .fa-sun {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .theme-toggle .fa-moon {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        html.light-mode .theme-toggle .fa-sun {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        html.light-mode .theme-toggle .fa-moon {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        html.light-mode h1 {
+            text-shadow: 0 0 15px rgba(59, 130, 246, 0.2), 0 0 25px rgba(13, 148, 136, 0.2);
+        }
+
+        html.light-mode h2 {
+            text-shadow: 0 0 8px rgba(59, 130, 246, 0.3), 0 0 16px rgba(59, 130, 246, 0.2);
+        }
+
+        html.light-mode .back-to-top:hover {
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4), 0 5px 15px rgba(13, 148, 136, 0.3);
+        }
+
+        .header-container {
+            min-height: 100vh;
+            background: var(--lighter);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .header-content {
+            text-align: center;
+            padding: 2rem;
+            max-width: 900px;
+            z-index: 10;
+            position: relative;
+        }
+        h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.1;
+            position: relative;
+            display: inline-block;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-origin: center;
+            background-size: 200% 200%;
+            text-shadow: 0 0 15px rgba(59, 130, 246, 0.3), 0 0 25px rgba(20, 184, 166, 0.3);
+        }
+
+        h1:hover {
+            transform: scale(1.02) translateY(-2px);
+            background-position: 100% 100%;
+            text-shadow: 0 0 25px rgba(59, 130, 246, 0.5), 0 0 40px rgba(20, 184, 166, 0.5);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--gray);
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .info-note {
+            background: var(--light);
+            color: var(--dark);
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            border: 1px solid var(--gray-light);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        #my-thoughts .info-note {
+            background-color: var(--lighter);
+            border-color: var(--gray-light);
+        }
+
+        .info-note:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-note p {
+            margin-bottom: 0;
+            font-size: 1.1rem;
+        }
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--primary);
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        section {
+            padding: 3rem 0;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: default;
+            text-shadow: 0 0 8px rgba(158, 182, 255, 0.5), 0 0 16px rgba(158, 182, 255, 0.3);
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 50%;
+            height: 5px;
+            background: var(--gradient);
+            border-radius: 3px;
+            transition: all 0.5s ease;
+        }
+
+        h2:hover {
+            transform: translateY(-3px);
+            color: var(--primary);
+        }
+
+        h2:hover::after {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            height: 6px;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            color: var(--dark);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: inline-block;
+            cursor: default;
+            position: relative;
+            transform-origin: left center;
+        }
+
+        h3::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            transition: all 0.4s ease;
+            border-radius: 2px;
+        }
+
+        h3:hover {
+            transform: scale(1.02);
+            color: var(--primary);
+        }
+
+        h3:hover::before {
+            width: 100%;
+        }
+
+        .company-card h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 0 0 1rem;
+            color: var(--dark);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: inline-block;
+            cursor: default;
+            position: relative;
+            transform-origin: left center;
+            text-shadow: none;
+        }
+
+        .company-card h3:hover {
+            transform: scale(1.02);
+            color: var(--secondary);
+            text-shadow: 0 0 15px rgba(20, 184, 166, 0.5);
+        }
+
+        .company-card h3::before {
+            display: none;
+        }
+        p {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+        .opportunity-card {
+            background: var(--lighter);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.05);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 5px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--gray-light);
+        }
+        .opportunity-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+        .opportunity-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 35px -5px rgba(0, 0, 0, 0.08);
+        }
+        .program-flyer {
+            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin: 2.5rem 0;
+            border-left: 5px solid var(--secondary);
+            position: relative;
+        }
+        .program-flyer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--secondary);
+        }
+        .program-flyer h3 {
+            color: var(--secondary);
+            margin-top: 0;
+        }
+        .pros-cons {
+            display: flex;
+            gap: 2rem;
+            margin: 2.5rem 0;
+        }
+        .pros, .cons {
+            flex: 1;
+            padding: 1.8rem;
+            border-radius: 16px;
+        }
+        .pros {
+            background-color: rgba(16, 185, 129, 0.15);
+            border-left: 4px solid var(--success);
+        }
+        .cons {
+            background-color: rgba(239, 68, 68, 0.15);
+            border-left: 4px solid #ef4444;
+        }
+        .pros h4, .cons h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        .pros h4::before {
+            content: '✓';
+            color: var(--success);
+            margin-right: 0.5rem;
+            font-weight: bold;
+        }
+        .cons h4::before {
+            content: '✗';
+            color: #ef4444;
+            margin-right: 0.5rem;
+            font-weight: bold;
+        }
+        ul, ol {
+            margin-left: 1.8rem;
+            margin-bottom: 1.8rem;
+        }
+        li {
+            margin-bottom: 0.7rem;
+            font-size: 1.1rem;
+        }
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+        .insight-box {
+            background: linear-gradient(135deg, #e0f2fe, #dbeafe);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            border-left: 4px solid var(--primary);
+            position: relative;
+        }
+        .insight-box h3 {
+            color: var(--primary);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+        .insight-box h3::before {
+            content: '💡';
+            margin-right: 0.8rem;
+            font-size: 1.5rem;
+        }
+        footer {
+            background: var(--light);
+            color: var(--dark);
+            padding: 4rem 0;
+            margin-top: 4rem;
+            border-top: 1px solid var(--gray-light);
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .back-to-top {
+            background: var(--gradient);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 99;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .back-to-top.visible {
+            opacity: 1;
+        }
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(158, 182, 255, 0.5), 0 5px 15px rgba(20, 184, 166, 0.4);
+        }
+
+        .back-to-top i {
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .back-to-top:hover i {
+            transform: rotate(360deg);
+        }
+
+        .company-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .company-card {
+            background: var(--lighter);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 5px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--gray-light);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .company-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .company-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .company-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 35px -5px rgba(0, 0, 0, 0.08);
+        }
+
+        .company-card h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 0 0 1rem;
+            color: var(--dark);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: inline-block;
+            cursor: default;
+            position: relative;
+            transform-origin: left center;
+        }
+
+        .company-card h3::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            transition: all 0.4s ease;
+            border-radius: 2px;
+        }
+
+        .company-card h3:hover {
+            transform: scale(1.02);
+            color: var(--primary);
+        }
+
+        .company-card h3:hover::before {
+            width: 100%;
+        }
+
+        .company-card p {
+            margin-bottom: 1rem;
+            color: var(--gray);
+            font-size: 1rem;
+            flex-grow: 1;
+        }
+
+        .home-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--light);
+            border: 1px solid var(--gray-light);
+            cursor: pointer;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-decoration: none;
+        }
+
+        .home-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        .home-button i {
+            font-size: 1.2rem;
+            color: var(--dark);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+           
+            .subtitle {
+                font-size: 1.2rem;
+            }
+           
+            .pros-cons {
+                flex-direction: column;
+            }
+           
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+    <script>
+        // Prevents FOUC by applying theme before page renders
+        (function() {
+            const theme = localStorage.getItem('theme');
+            if (theme === 'light') {
+                document.documentElement.classList.add('light-mode');
+            }
+        })();
+    </script>
+</head>
+<body>
+    <a href="index.html" class="home-button">
+        <i class="fas fa-home"></i>
+    </a>
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+    </div>
+    <div class="header-container">
+        <div class="header-content">
+            <h1>Intern Madness</h1>
+            <p class="subtitle">Insights into the Internship Process at IIT Delhi for Quant & Tech roles</p>
+           
+            
+        </div>
+       
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </div>
+    <main class="container">
+        <section id="introduction">
+            <h2>Introduction</h2>
+            <div class="opportunity-card">
+                <p>The internship orientation session was conducted by OCS sometime around 15th June and the CV deadline was 22nd June and extended to 26th (Maybe dates are a bit here and there but roughly this was the timeline).</p>
+                <p>Some things which are important for (Quant/Tech) CV are your JEE Advanced Rank, Olympiad Achievements, CGPA, Department Rank, participation in Quant Programs like SEE, Futurefocus, Launchpad etcetera, Foreign Research Internship, Projects (Course projects and self projects).</p>
+                <p>Participation in Quant Programs holds a lot of importance and might help a lot in getting a CV shortlist for Quant companies.</p>
+                <p>Then, the company's Job Description files started getting uploaded on the portal and we could apply to them (there was a deadline). The JD files included the stipend, number of rounds (although this is not at all followed by most companies), skills required (same here) and expected number of hires (again the same).</p>
+                <p>The deadline for applications for companies varied a lot with some companies giving 2 weeks to apply while others giving just 2 days.</p>
+                <p>The key thing is that you can apply to at most 50 companies. So use your applications wisely and don’t apply blindly to all the companies. Although 50 seems a lot, applications can get used up pretty quickly.</p>
+                <p>Then, the PPT’s and tests started from 15th July. In PPT’s companies mostly try to sell themselves to the students and tell students about themselves. Some PPT’s are actually useful in the sense that you get to know about the number of rounds, what will be actually asked in the interviews and GD’s etcetera but mostly I found them to be not very useful.</p>
+                <p>The main part of the process is the tests. Tests can be coding tests of 1 hour or 2 hours or can be a mix of coding and some maths problems or can be only maths problems. The duration and format varies for every company.</p>
+                <p>The coding part of the tests mainly includes DSA / CP problems. The level of the tests vary a lot from company to company although I found most tests to be quite doable with a good amount of CP/DSA prep. Hardly 5-6 companies had very hard coding tests. Tests included problems mainly from topics like strings, arrays, graphs, trees, dynamic programming and of course ad hoc problems.</p>
+                <p>The maths parts of the tests mainly includes Olympiad style maths (the style is not exactly olympiad but rather a mix of olympiad and JEE style maths). The main topics in the maths tests were combinatorics, probability, number theory and brain teasers. I found the standard Quant interview prep of solving probability puzzles and brainteasers to not be very helpful for the tests. Few tests had puzzles but they were mostly very standard Xingfeng/Brainstellar puzzles.</p>
+            </div>
+        </section>
+        <section id="company-insights">
+            <h2>Company Specific Insights</h2>
+            <div class="company-grid">
+                <div class="company-card">
+                    <h3>Tower</h3>
+                    <p>Different Tests for Limestone and North Moore. 1 hour tests for each and same test for both Algo Developer and Quant Developer profiles. Open for CS, MT with 8.9 CG criteria. Very hard CP and Probability questions.</p>
+                </div>
+                <div class="company-card">
+                    <h3>HRT</h3>
+                    <p>2 hour test, common for both Algo Developer and Software Engineer profiles, Open for all branches and 7.9 CG criteria. 4 DSA problems. Pretty easy test. GD was a side by side coding challenge in a timed manner.</p>
+                </div>
+                <div class="company-card">
+                    <h3>Jane Street</h3>
+                    <p>1 hour tests, different tests for Trading and Software. Open for CS, MT, EE, PH and 8.5 CG Criteria. Trading test had some math based trading game with a lot of sub parts. Software test were DSA questions. GD was mostly CV discussion.</p>
+                </div>
+                <div class="company-card">
+                    <h3>Optiver</h3>
+                    <p>71 min test for Trader/Researcher/Market Risk and 95 min test for Software.  Open for CS, MT, EE, PH, ME and 8.4 CG Criteria. The trading test included a 26 min guess the sequence test with 25 questions and a 45 minute probability test with 30 questions. The sequence test was pretty easy but the probability test was very hard. Each question had a dedicated time of 90 seconds and there was +1,-1 negative marking. The questions were based on estimation and not a part of standard quant prep. The Software test was a 75 minute coding test and also a 20 min MCQ Test. The 75 minute coding test had only 1 question which was based on DSA and OOPS. The 20 minute MCQ test included all kinds of CS concepts like OS, CN, DSA, and some random stuff.</p>
+                    <p>GD was the same for both roles. It was a question based on converting types of fruits to each other with some cost.</p>
+                </div>
+                <div class="company-card">
+                    <h3>Da Vinci</h3>
+                    <p>20 minute test. Open for all branches with 7 CG criteria. The test was maths and logical reasoning based with 20 questions. Speed mattered a lot.</p>
+                </div>
+                <div class="company-card">
+                    <h3>Virtu Financial</h3>
+                    <p>75 minute Coding Test. Common for both Trading and Software. Open for CS, MT, EE, PH and CG Criteria was 9. The test was very easy and included 5 DSA questions.</p>
+                </div>
+                <div class="company-card">
+                    <h3>Citadel</h3>
+                    <p>60 minute test. Citadel only came for the Software role. Open for CS, MT, EE, PH and CG criteria was 7.4. The test had some CP questions and was very easy.</p>
+                </div>
+                <div class="company-card">
+                    <h3>IMC Trading</h3>
+                    <p>115 min tests. Different tests for Trading and Software (you could only apply for one role). Open for CS, MT, EE, PH, AM and CG Criteria was 8. The Trading test had two parts. The first part was a Hackerrank test with one coding question and 20 other questions based on probability, brainteasers and sequence guessing, this was for 75 min. The second part was a40 min brain reaction time measuring test conducted on the Neurolympics platform. No real preparation can be done for that. The Software test had coding questions and was standard DSA and CP. Shortlisting criteria for Trading GD was mostly random (Of course this is just observation, nobody knows what the company actually did).</p>
+                </div>
+                <div class="company-card">
+                    <h3>DRW </h3>
+                    <p>45 minute test. Open for CS, MT and EE and 8.5 CG criteria. Very easy only maths test with problems from probability and linear algebra.</p>
+                </div>
+                <div class="company-card">
+                    <h3>Quadeye </h3>
+                    <p>No test for Quadeye India. Only a CV Shortlist.</p>
+                </div>
+                <div class="company-card">
+                    <h3>Atlas Research </h3>
+                    <p>Two tests were conducted. Shortlisting criteria for the first test was CS, MT and EE with 8.5+ CG. Common test for both profiles. The first test had 3 parts. 50 minutes for Math problems based on probability and number theory. 60 minutes for 3 very hard CP problems. 10 minutes for 5 C++ questions based on Memory alignment and padding and virtual functions. Shortlisting criteria for the second test was CS, MT 9+ CG and EE I think 9.3+ CG though not sure, but most likely test 1 performance was not accounted for. Test 2 was a completely subjective 1.5 hour pen paper based test. Two Hard Math problems based on Integration and Number theory, they were proof based. Two Hard CP problems based on Number Theory and DP. One problem based on systems/C++ concepts. Again it was a common test.</p>
+                </div>
+                <div class="company-card">
+                    <h3>QuantBox </h3>
+                    <p>Two tests were conducted. Shortlisting criteria for the first test was CS, MT, EE, AM, PH with 8.5+ CG. Common test for all profiles. It was a 2 hour test. The first test had 4 parts. The first part was a 45 minute CP test with 3 very hard questions. The second part was a 40 minute Math based test with 6 questions based on Probability and Discrete maths in which we had to type out proofs. The third part was a 20 minute test based on C++ concepts, it had 20 questions. The fourth part was a 15 minute test based on systems concepts, it had 15 questions. The first test was online. Shortlisting Criteria for the second test was mainly the performance in the first test. I don't know much about the second test. I will ask someone and write it here.</p>
+                </div>
+                <div class="company-card">
+                    <h3>Graviton </h3>
+                    <p>Three separate profile wise tests. Shortlisting Criteria for the tests was CS, MT and EE with 8.5+ CG. The Researcher test was a pen paper based 1 hour maths test with 4 questions. They were mostly discrete math / olympiad type. The Software test was a pen paper based 1 hour test with 2 CP questions and one question based on OOPS concepts. The ULL test was CP questions and C++ questions.</p>
+                </div>
+                <div class="company-card">
+                    <h3>WorldQuant</h3>
+                    <p>2 hour test. Shortlisting criteria for the test was CS, MT, EE, AM and PH with 8.5 + CG. The test was Probability, Number Theory and Discrete Maths with some random ML questions as well. The test was hard.</p>
+                </div>
+                <div class="company-card">
+                    <h3>NK Securities</h3>
+                    <p>2 hour test. Shortlisting criteria for the test CS with 9+ CG or good JEE Advanced rank or MT, EE with 9.5+ CG or good JEE Advanced rank. Test had 2 CP questions and 14 probability questions. It was a tough test.</p>
+                </div>
+                <div class="company-card">
+                    <h3>Daksh Trading </h3>
+                    <p>47 minute test common for both profiles. Open for CS, MT and EE with 8.5+ CG criteria. Test had 8 maths puzzles.</p>
+                </div>
+                <div class="company-card">
+                    <h3>Eubillient</h3>
+                    <p>1.5 hour test. Shortlisting criteria for the test CS, MT, EE, AM and PH with 9+ CG. The test was Olympiad style maths and not a part for standard quant prep. It was a pen paper test with subjective and objective questions.</p>
+                </div>
+                <div class="company-card">
+                    <h3>Millennium</h3>
+                    <p>2 hour test. Open for all branches with 8+ CG criteria. The test had 2 hard CP questions and 5 random and weird maths questions.</p>
+                </div>
+                <div class="company-card">
+                    <h3>Qube</h3>
+                    <p>90 minute test. Open for all branches with 8+ CG criteria. The test had 2 CP questions and 12 math /  brainteasers and ML questions. The test was very easy.</p>
+                </div>
+                <div class="company-card">
+                    <h3>26 Miles</h3>
+                    <p>90 minute test. Same test for both Quant and Software. The test had 2 moderate CP questions and 30 questions based on brainteasers, logical reasoning, probability and finance concepts.</p>
+                </div>
+                <div class="company-card">
+                    <h3>Glean</h3>
+                    <p>No test. Only CV shortlisting.</p>
+                </div>
+                <div class="company-card">
+                    <h3>Goldman Sachs</h3>
+                    <p>Two different tests for the two profiles. Quant test had 2 tough CP questions and around 10 other maths questions based on probability and JEE Maths. Software Test had 2 easy CP questions and one Hard CP question and 10-15 MCQs on finding the output and some maths questions as well.</p>
+                </div>
+                <div class="company-card">
+                    <h3>NeoWealth Asset Management</h3>
+                    <p>Two different tests for the two profiles. Quant test had 1 moderate CP question and around 13 other maths questions based on probability, brainteasers and finance concepts. Software Test had 2 very hard CP questions and 3 DSA MCQ’s.</p>
+                </div>
+                <div class="company-card">
+                    <h3>Samsung Korea</h3>
+                    <p>3 hour test. Open for CS1, MT1 and EE1 with 8.5+ CG criteria. The test was a brute force annoying DSA problem. The code editor was harder to understand than the question.</p>
+                </div>
+                <div class="company-card">
+                    <h3>JP Morgan Chase</h3>
+                    <p>Three different test for 3 different profiles. SGEP (software) test was 2 very easy CP questions in 1 hour. Markets test had 2 parts. One part was 50 questions in 60 minutes and topics were General maths, finance, probability and english. Second part had 2 CP questions. One set of people got 2 very easy questions and the other set of people got 1 very easy and 1 very hard question. Quant Researcher test also had 2 parts. First part had General Maths, General Coding and Probability MCQs with 30 questions in 45 minutes. They were mostly speed focused questions with known results. Second part had 2 easy CP questions.</p>
+                </div>
+                <div class="company-card">
+                    <h3>Natwest</h3>
+                    <p>No test for the quant role. There was a CV shortlist.</p>
+                </div>
+                <div class="company-card">
+                    <h3>Deutsche Bank</h3>
+                    <p>No test for the trader role. Open for all. There was a CV shortlist.</p>
+                </div>
+                <div class="company-card">
+                    <h3>Google</h3>
+                    <p>1 hour test. Open for CS, MT, EE, AM and PH with 7+ CG criteria. The test had 2 questions and different people had different sets. Questions were moderate DP based.</p>
+                </div>
+                <div class="company-card">
+                    <h3>Atlassian</h3>
+                    <p>90 minute test. Open for all CS, MT, EE, AM and PH with 6.5+ CG criteria. The test had 3 moderate DSA questions.</p>
+                </div>
+                <div class="company-card">
+                    <h3>Microsoft</h3>
+                    <p>1 hour test. Open for all branches with 6.5+ CG criteria. The test had 2 questions and different people had different sets. Questions were easy.</p>
+                </div>
+                <div class="company-card">
+                    <h3>Adobe</h3>
+                    <p>1.5 hour test. The test had 30 MCQs and 2 easy coding questions. MCQs were reasoning based and coding based.</p>
+                </div>
+                <div class="company-card">
+                    <h3>Amazon</h3>
+                    <p>The test had 2 parts. One was a 70 minute coding test and the other part was a 40 minute behavioral test. Coding test had 2 very easy CP questions. The behavioral test was kind of random.</p>
+                </div>
+                <div class="company-card">
+                    <h3>BlackRock</h3>
+                    <p>No test for the quant role. There was a CV shortlist.</p>
+                </div>
+            </div>
+        </section>
+        <section id="my-thoughts">
+            <h2>My Thoughts</h2>
+            <div class="opportunity-card">
+                <p>I personally found the internship season to be very hectic and chaotic. 3-4 tests were being conducted during the day with some tests ending at 1:00 am and others starting at 6:00 am. Most people missed classes for the first 2.5 weeks. From what I observed, the internship season is based a lot on luck and past achievements. JEE Advanced ranks and high CGPA (9.5+) matters a lot and makes getting shortlists much easier. The shortlists (as you might have read) were mostly based on very good JEE Advance ranks, Department ranks and a lot of luck.</p>
+                <p>I also observed that GD preparation is often neglected. Ability to think fast and solve probability questions / brainteasers and speaking out is important for GD’s. In the Quant programs held by companies, a lot of trading and market making games are played and those are quite important for GD’s.</p>
+                <p>Some people had very good luck and got a lot of shortlists but others got very few. I think that Patience and Resilience are the things required to cope with this time and I would strongly suggest people to build up on these qualities since not getting shortlists due to bad luck can be extremely demotivating and have a very negative impact on your mental health. Apart from that, being aware of what all is going on, which company asked which types of questions is helpful since often a lot of questions get repeated. Keeping calm is also a very important quality to have. For getting interview specific guidance, I would suggest contacting seniors who have got internships in the respective companies. A lot of company specific insight can also be gained by reading blogs of other colleges like IIT Kharagpur and on other websites. Start preparing early, keep your morale high and develop qualities like patience and resilience.</p>
+                <p>I got an offer from Goldman Sachs as a Software Engineering Intern.</p>
+                
+            </div>
+            <div class="info-note">
+                <p>To get more info about the selection criterias (observed by me) you may reach out to me. Also feel free to reach out to me if you have any questions or need guidance.</p>
+                <p>Best of Luck.</p>
+                <p>Videep Ekbote | 2023MT10940</p>
+            </div>
+        </section>
+    </main>
+    
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    <script>
+        // Scroll animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTop = document.getElementById('backToTop');
+            const headerContent = document.querySelector('.header-content');
+           
+            // Initial state for animation
+            headerContent.style.opacity = '0';
+            headerContent.style.transform = 'translateY(20px)';
+
+            // Animate in
+            setTimeout(() => {
+                headerContent.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                headerContent.style.opacity = '1';
+                headerContent.style.transform = 'translateY(0)';
+            }, 100);
+
+            // Back to top functionality
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+           
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+           
+            // Smooth scroll to content
+            document.querySelector('.scroll-down').addEventListener('click', () => {
+                window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+            });
+
+            // Theme toggle
+            const themeToggle = document.getElementById('themeToggle');
+            const body = document.body;
+            const html = document.documentElement;
+
+            const setTheme = (theme) => {
+                if (theme === 'light') {
+                    html.classList.add('light-mode');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    html.classList.remove('light-mode');
+                    localStorage.setItem('theme', 'dark');
+                }
+            };
+
+            // The initial theme is set by the script in the <head>
+            // This script only needs to handle the click event
+            themeToggle.addEventListener('click', () => {
+                if (html.classList.contains('light-mode')) {
+                    setTheme('dark');
+                } else {
+                    setTheme('light');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
