@@ -156,10 +156,10 @@
   }
 
   function mix(total) {
-    var add = Math.round(total * 0.34);
-    var sub = Math.round(total * 0.34);
-    var mul = Math.round(total * 0.16);
-    var div = total - add - sub - mul;
+    var mul = Math.round(total * 0.24);
+    var div = Math.round(total * 0.16);
+    var add = Math.round(total * 0.30);
+    var sub = total - add - mul - div;
     return { add: add, sub: sub, mul: mul, div: div };
   }
 
