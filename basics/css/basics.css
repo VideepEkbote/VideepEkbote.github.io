@@ -200,7 +200,7 @@ html.light-mode .theme-toggle .fa-moon {
 .shell {
     width: min(1080px, calc(100% - 2.5rem));
     margin: 0 auto;
-    padding: 6.5rem 0 4.5rem;
+    padding: 6.5rem 0 6rem;
 }
 
 .kicker {
@@ -294,15 +294,6 @@ h1 em {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-}
-
-.piece-kicker {
-    display: block;
-    font-size: 0.75rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--gray);
-    margin-bottom: 0.4rem;
 }
 
 .piece-title {
@@ -557,7 +548,7 @@ html.light-mode .flip-label {
 
 @media (max-width: 760px) {
     .shell {
-        width: min(1080px, calc(100% - 1.5rem));
+        width: min(1080px, calc(100% - 2.5rem));
         padding-top: 5.75rem;
     }
 
