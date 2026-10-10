@@ -465,6 +465,17 @@ html.light-mode .flip-label {
     color: var(--dark);
 }
 
+.tech {
+    color: var(--dark);
+}
+
+.tech .katex-display {
+    margin: 1.1rem 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 0.2rem;
+}
+
 .prose .pair {
     font-family: Fraunces, Georgia, serif;
     font-size: 1.28rem;
