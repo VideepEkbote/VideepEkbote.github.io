@@ -5,64 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Basics | Videep Ekbote</title>
     <meta name="description" content="Basics every human should know. A small set of pieces about ordinary reasoning, starting with why A implies B does not mean B implies A.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,560;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/basics.css">
-    <script>
-        (function () {
-            try {
-                if (localStorage.getItem("theme") === "light") {
-                    document.documentElement.classList.add("light-mode");
-                }
-            } catch (e) {}
-        })();
-    </script>
 </head>
 <body>
-    <a class="home-button" href="../index.html" aria-label="Home">
-        <i class="fas fa-home"></i>
-    </a>
-    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle color theme">
-        <i class="fas fa-moon"></i>
-        <i class="fas fa-sun"></i>
-    </button>
-
-    <div class="shell">
-        <header class="hero-copy">
-            <p class="kicker">Basics</p>
-            <h1>Basics <em>every human</em> should know</h1>
-            <p class="lede">A few ideas I think are worth having, in ordinary life, with no syllabus attached. Three pieces will live here. The first one is written.</p>
+    <div class="blog-page">
+        <header class="blog-header">
+            <div class="blog-header-top">
+                <div class="header-brand">
+                    <h1>Basics</h1>
+                    <nav class="header-nav">
+                        <a href="../index.html" class="nav-link">Home</a>
+                        <a href="./" class="nav-link active" aria-current="page">Basics</a>
+                    </nav>
+                </div>
+            </div>
+            <p class="blog-subtitle">Basics every human should know. A few ideas I think are worth having, in ordinary life, with no syllabus attached. Three pieces will live here. The first one is written.</p>
         </header>
-
         <!--
-            Adding a piece: copy the <li> below, point the link at a new folder
-            with its own index.html, and reuse css/basics.css plus js/page.js.
-            Leave the card out until the piece actually exists.
+            Adding a piece: copy a blog-card below and point it at a new folder
+            with its own index.html. Leave the card out until the piece exists.
         -->
-        <ol class="pieces">
-            <li>
-                <a class="piece" href="a-implies-b/">
-                    <span class="piece-index">01</span>
-                    <span>
-                        <span class="piece-title">A implies B does not mean B implies A</span>
-                        <span class="piece-dek">People take a sentence that runs one way and use it backwards, as if the reverse had been proved.</span>
-                    </span>
-                    <span class="piece-go">Read <span aria-hidden="true">&rarr;</span></span>
-                </a>
-            </li>
-        </ol>
-
-        <aside class="soon">
-            <p class="soon-count">02, 03</p>
-            <p>Two more pieces are on the way. They will show up here when they are actually written.</p>
-        </aside>
-
-        <footer class="colophon">
-            <a href="../index.html">Videep Ekbote</a>
-        </footer>
+        <div class="blog-list">
+            <a class="blog-card" href="a-implies-b/">
+                <div class="blog-card-title">A implies B does not mean B implies A</div>
+                <div class="blog-card-excerpt">People take a sentence that runs one way and use it backwards, as if the reverse had been proved.</div>
+                <div class="blog-card-date">October 10, 2026</div>
+            </a>
+        </div>
+        <p class="blog-more">Two more pieces are on the way. They will show up here when they are actually written.</p>
     </div>
-    <script src="js/page.js"></script>
 </body>
 </html>

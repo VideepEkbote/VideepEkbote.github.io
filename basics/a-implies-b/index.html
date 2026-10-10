@@ -5,55 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A implies B does not mean B implies A | Videep Ekbote</title>
     <meta name="description" content="A implies B does not mean B implies A. How people flip a true sentence in ordinary life, and why the reverse is a different claim.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,560;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
     <link rel="stylesheet" href="../css/basics.css">
-    <script>
-        (function () {
-            try {
-                if (localStorage.getItem("theme") === "light") {
-                    document.documentElement.classList.add("light-mode");
-                }
-            } catch (e) {}
-        })();
-    </script>
 </head>
 <body>
-    <div class="progress" aria-hidden="true"><span></span></div>
-    <a class="home-button" href="../../index.html" aria-label="Home">
-        <i class="fas fa-home"></i>
-    </a>
-    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle color theme">
-        <i class="fas fa-moon"></i>
-        <i class="fas fa-sun"></i>
-    </button>
-
-    <article class="shell">
-        <header class="article-hero">
-            <p class="kicker">Basics 01</p>
-            <h1>A implies B does not mean B implies A</h1>
-            <p class="lede">People take a sentence that is true in one direction and use it backwards. That is a different sentence.</p>
-            <p class="byline">Videep Ekbote / <a href="../">All basics</a></p>
+    <div class="blog-page">
+        <header class="blog-header">
+            <div class="blog-header-top">
+                <div class="header-brand">
+                    <h1>Basics</h1>
+                    <nav class="header-nav">
+                        <a href="../../index.html" class="nav-link">Home</a>
+                        <a href="../" class="nav-link active" aria-current="page">Basics</a>
+                    </nav>
+                </div>
+            </div>
         </header>
+        <a href="../" class="blog-back">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg>
+            All basics
+        </a>
+        <article>
+            <header class="blog-post-header">
+                <h2 class="blog-post-title">A implies B does not mean B implies A</h2>
+                <time class="blog-post-date" datetime="2026-10-10">October 10, 2026</time>
+            </header>
+            <div class="blog-post-content">
+                <p>People take a sentence that is true in one direction and use it backwards. That is a different sentence.</p>
 
-        <div class="flip">
-            <div class="flip-side">
-                <span class="flip-label">A implies B</span>
-                <p>If it rains, the ground gets wet.</p>
-            </div>
-            <p class="flip-break">does not mean</p>
-            <div class="flip-side flip-side-weak">
-                <span class="flip-label">B implies A</span>
-                <p>The ground is wet, so it rained.</p>
-            </div>
-        </div>
-
-        <div class="prose">
             <section id="mix-up">
-                <h2>The mix up</h2>
+                <h3 class="blog-section-title">The mix up</h3>
                 <p>The most important thing to understand is this. If A implies B, you only get one direction. You do not get the reverse.</p>
                 <p>People still use the reverse. They hear a rule, and the next time the result shows up they announce the cause.</p>
                 <p>Doctors do it. Lawyers do it. Engineers, journalists and managers do it.</p>
@@ -71,7 +53,7 @@
             </section>
 
             <section id="relationships">
-                <h2>Relationships</h2>
+                <h3 class="blog-section-title">Relationships</h3>
                 <p>If he cared, he would remember the birthday. He remembered, so he cares.</p>
                 <p>A reminder on the phone can do that. So can a friend who texted him in the morning. So can guilt. So can a person who is good with dates and careless about everything else.</p>
                 <p>The memory is real. The feeling is a guess.</p>
@@ -90,7 +72,7 @@
             </section>
 
             <section id="health">
-                <h2>Health</h2>
+                <h3 class="blog-section-title">Health</h3>
                 <p>If you have the flu, you get a fever. You have a fever, so you have the flu.</p>
                 <p>A fever has many causes. Some other infection. A reaction. Heat. A medicine.</p>
                 <p>In a house, the sentence that actually gets used is the second one. You are warm, so it is the flu, take this.</p>
@@ -116,7 +98,7 @@
             </section>
 
             <section id="money">
-                <h2>Money</h2>
+                <h3 class="blog-section-title">Money</h3>
                 <p>If a person is rich, they have a nice car. They have a nice car, so they are rich.</p>
                 <p>Cars get leased. Cars get gifted. Cars get bought on an EMI that will hurt for years.</p>
                 <p>The car is in the parking lot. The loan is not.</p>
@@ -142,7 +124,7 @@
             </section>
 
             <section id="careers">
-                <h2>Careers and exams</h2>
+                <h3 class="blog-section-title">Careers and exams</h3>
                 <p>If someone is good at the job, they get promoted. They got promoted, so they are good.</p>
                 <p>Promotions follow timing, a boss who likes you, a seat that opened, a team that happened to do well, and sometimes actual skill.</p>
                 <p>The new title tells you who received the title.</p>
@@ -166,7 +148,7 @@
             </section>
 
             <section id="news">
-                <h2>News</h2>
+                <h3 class="blog-section-title">News</h3>
                 <p>If a story matters, it leads the page. It leads the page, so it matters.</p>
                 <p>The top of a page follows fear, clicks, and whatever happened in the last hour. A fire two kilometres away can sit above a slow problem that will hit many more people.</p>
                 <p>Journalists know this about their own desk. They still feel it when they are the ones scrolling.</p>
@@ -184,7 +166,7 @@
             </section>
 
             <section id="parenting">
-                <h2>Parenting</h2>
+                <h3 class="blog-section-title">Parenting</h3>
                 <p>If a child is happy at school, they talk about it at dinner. They talked about school, so they are happy.</p>
                 <p>They may have talked because you asked. Because one funny thing happened in the break. Because they are a child who talks.</p>
                 <p>A story about lunch is not a report on the day.</p>
@@ -201,7 +183,7 @@
             </section>
 
             <section id="workplace">
-                <h2>Work</h2>
+                <h3 class="blog-section-title">Work</h3>
                 <p>If someone has checked out, their camera is off. The camera is off, so they have checked out.</p>
                 <p>The camera is also off for a bad connection, a sleeping baby, a face they do not want recorded, or a person who is typing. A person can run a large team and still treat a black box as a reading of character.</p>
                 <p>If the meeting was useful, people spoke. People spoke, so the meeting was useful.</p>
@@ -216,7 +198,7 @@
             </section>
 
             <section id="politics">
-                <h2>Politics</h2>
+                <h3 class="blog-section-title">Politics</h3>
                 <p>I am not taking a side in this section. The mistake works for every side. It does not need a party name.</p>
                 <p>If a policy worked, some number moved the way people hoped. The number moved, so the policy worked.</p>
                 <p>Numbers move because of weather, a festival, a different rule, a change in how the count is done, and people changing their habits for reasons that had nothing to do with the speech.</p>
@@ -231,7 +213,7 @@
             </section>
 
             <section id="trained">
-                <h2>Why trained people still do it</h2>
+                <h3 class="blog-section-title">Why trained people still do it</h3>
                 <p>The two sentences use the same words.</p>
                 <p>Rain, then wet ground. Wet ground, then rain.</p>
                 <p>If the first one sounded sensible, the ear lets the second one through. It feels like repetition.</p>
@@ -250,7 +232,7 @@
             </section>
 
             <section id="what-to-do">
-                <h2>What to do with it</h2>
+                <h3 class="blog-section-title">What to do with it</h3>
                 <p>When the conclusion shows up as "B, therefore A", say both sentences out loud.</p>
                 <p>Rain makes the ground wet.</p>
                 <p>Wet ground means it rained.</p>
@@ -261,13 +243,13 @@
                 <p>A implies B is one sentence. B implies A is another sentence. Using the same words does not make them the same fact. The result in front of you is not proof of the cause you already prefer. Say both directions out loud. If the reverse sounds weaker, it is weaker. Do not spend your money, your reading of another person, or your reading of the news on a sentence that was only ever true the other way.</p>
             </section>
 
-            <section id="technical" class="tech">
-                <h2>Technical Viewpoint</h2>
+            <section id="technical">
+                <h3 class="blog-section-title">Technical Viewpoint</h3>
                 <p>If you want the same point in symbols, here it is. The life above does not depend on this part. This part only names the split.</p>
                 <p>A implies B is written \( A \Rightarrow B \). The converse is \( B \Rightarrow A \). They are different statements.</p>
                 <p>The truth table makes the split obvious. Look at the row where A is false and B is true. The implication holds. The converse does not.</p>
                 <p>That row is wet ground, and no rain.</p>
-                <div class="math">$$
+                <p class="math-block">$$
 \begin{array}{c|c|c|c}
 A & B & A \Rightarrow B & B \Rightarrow A \\
 \hline
@@ -276,47 +258,28 @@ A & B & A \Rightarrow B & B \Rightarrow A \\
 \mathrm{F} & \mathrm{T} & \mathrm{T} & \mathrm{F} \\
 \mathrm{F} & \mathrm{F} & \mathrm{T} & \mathrm{T}
 \end{array}
-$$</div>
+$$</p>
                 <p>Probability has the same split, with two different numbers. \( P(B \mid A) \) is the chance of B when you already know A. \( P(A \mid B) \) is the chance of A when you already know B.</p>
                 <p>People hear a high \( P(B \mid A) \) and walk around as if they were told \( P(A \mid B) \).</p>
                 <p>Bayes' rule is the link between them.</p>
-                <div class="math">$$
+                <p class="math-block">$$
 P(A \mid B) = \frac{P(B \mid A)\, P(A)}{P(B)}
-$$</div>
+$$</p>
                 <p>If A really does imply B, then \( P(B \mid A) = 1 \), and the formula becomes this.</p>
-                <div class="math">$$
+                <p class="math-block">$$
 P(A \mid B) = \frac{P(A)}{P(B)}
-$$</div>
+$$</p>
                 <p>That fraction is 1 only when B does not show up without A. In ordinary life B has other causes, so \( P(B) \) is larger than \( P(A) \), and \( P(A \mid B) \) is smaller than 1.</p>
                 <p>The implication can be solid. The reverse can still be a bad bet.</p>
                 <p>That is all the symbols are saying.</p>
-                <div class="signoff">
-                    <p>Best of Luck.</p>
+                <p>Best of Luck.</p>
                     <p>Videep Ekbote</p>
-                </div>
-            </section>
-
-            <footer class="colophon">
-                <a href="../">All basics</a>
-                <a href="../../index.html">Home</a>
-            </footer>
-        </div>
-    </article>
-
-    <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js"></script>
-    <script>
-        renderMathInElement(document.getElementById("technical"), {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "\\(", right: "\\)", display: false }
-            ],
-            throwOnError: false
-        });
-    </script>
-    <script src="../js/page.js"></script>
+                </section>
+            </div>
+        </article>
+    </div>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: true}]});"></script>
 </body>
 </html>
